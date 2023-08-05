@@ -14,6 +14,7 @@ const cors = require("cors");
 // for morgan
 const morgan = require("morgan");
 
+
 //establish connection
 mongoose.connect(DATABASE_URL);
 
@@ -31,6 +32,8 @@ const cheeseSchema = new mongoose.Schema({
     image: String
 })
 
+const Cheese = mongoose.model("Cheese", cheeseSchema)
+
 // middleware
 //---------------------//
 // cors for preventing cors errors...(allows all requests from other origins)
@@ -42,6 +45,23 @@ app.use(express.json())
 
 // routes
 //---------------------//
+// we dont need new, and edit...just iducs..
+
+// index 
+app.get("/cheese", async (req, res) => {
+    try {
+        const cheese = await Cheese.find({})
+        res.json(cheese)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+
+})
+
+// create
+
+
+
 // test route
 app.get("/", (req, res) => {
     res.json({hello: "world"})
