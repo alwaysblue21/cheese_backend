@@ -59,7 +59,34 @@ app.get("/cheese", async (req, res) => {
 })
 
 // create
+app.post("/cheese", async (req, res) => {
+    try {
+        const cheese = await Cheese.create(req.body)
+        res.json(cheese)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+})
 
+// show
+app.get("/cheese/:id", async (req, res) => {
+    try {
+        const cheese = await Cheese.findById(req.params.id)
+        res.json(cheese)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+})
+
+// update
+app.put("/cheese/:id", async (req, res) => {
+    try {
+        const cheese = await Cheese.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        res.json(cheese)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+})
 
 
 // test route
