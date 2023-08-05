@@ -88,6 +88,16 @@ app.put("/cheese/:id", async (req, res) => {
     }
 })
 
+// delete
+app.delete("/cheese/:id", async (req, res) => {
+    try {
+        const cheese = await Cheese.findByIdAndDelete(req.params.id)
+        res.status(204).json(cheese)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+})
+
 
 // test route
 app.get("/", (req, res) => {
