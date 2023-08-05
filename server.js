@@ -23,6 +23,14 @@ mongoose.connection
 .on("close", () => console.log("You are disconnected from mongoose"))
 .on("error", (error) => console.log(error))
 
+// models
+//---------------------//
+const cheeseSchema = new mongoose.Schema({
+    name: String,
+    countryOfOrigin: String,
+    image: String
+})
+
 // middleware
 //---------------------//
 // cors for preventing cors errors...(allows all requests from other origins)
