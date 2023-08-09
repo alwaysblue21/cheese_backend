@@ -26,13 +26,13 @@ mongoose.connection
 
 // models
 //---------------------//
-const cheeseSchema = new mongoose.Schema({
+const cheesesSchema = new mongoose.Schema({
     name: String,
     countryOfOrigin: String,
     image: String
 })
 
-const Cheese = mongoose.model("Cheese", cheeseSchema)
+const Cheeses = mongoose.model("Cheeses", cheesesSchema)
 
 // middleware
 //---------------------//
@@ -48,10 +48,10 @@ app.use(express.json())
 // we dont need new, and edit...just iducs..
 
 // index 
-app.get("/cheese", async (req, res) => {
+app.get("/cheeses", async (req, res) => {
     try {
-        const cheese = await Cheese.find({})
-        res.json(cheese)
+        const cheeses = await Cheeses.find({})
+        res.json(cheeses)
     } catch (error) {
         res.status(400).json({error})
     }
@@ -59,9 +59,9 @@ app.get("/cheese", async (req, res) => {
 })
 
 // create
-app.post("/cheese", async (req, res) => {
+app.post("/cheeses", async (req, res) => {
     try {
-        const cheese = await Cheese.create(req.body)
+        const cheese = await Cheeses.create(req.body)
         res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
@@ -69,9 +69,9 @@ app.post("/cheese", async (req, res) => {
 })
 
 // show
-app.get("/cheese/:id", async (req, res) => {
+app.get("/cheeses/:id", async (req, res) => {
     try {
-        const cheese = await Cheese.findById(req.params.id)
+        const cheese = await Cheeses.findById(req.params.id)
         res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
@@ -79,9 +79,9 @@ app.get("/cheese/:id", async (req, res) => {
 })
 
 // update
-app.put("/cheese/:id", async (req, res) => {
+app.put("/cheeses/:id", async (req, res) => {
     try {
-        const cheese = await Cheese.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        const cheese = await Cheeses.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
@@ -89,9 +89,9 @@ app.put("/cheese/:id", async (req, res) => {
 })
 
 // delete
-app.delete("/cheese/:id", async (req, res) => {
+app.delete("/cheeses/:id", async (req, res) => {
     try {
-        const cheese = await Cheese.findByIdAndDelete(req.params.id)
+        const cheese = await Cheeses.findByIdAndDelete(req.params.id)
         res.status(204).json(cheese)
     } catch (error) {
         res.status(400).json({error})
