@@ -26,13 +26,13 @@ mongoose.connection
 
 // models
 //---------------------//
-const cheesesSchema = new mongoose.Schema({
+const cheeseSchema = new mongoose.Schema({
     name: String,
     countryOfOrigin: String,
     image: String
 })
 
-const Cheeses = mongoose.model("Cheeses", cheesesSchema)
+const Cheese = mongoose.model("Cheese", cheeseSchema)
 
 // middleware
 //---------------------//
@@ -48,10 +48,10 @@ app.use(express.json())
 // we dont need new, and edit...just iducs..
 
 // index 
-app.get("/cheeses", async (req, res) => {
+app.get("/cheese", async (req, res) => {
     try {
-        const cheeses = await Cheeses.find({})
-        res.json(cheeses)
+        const cheese = await Cheese.find({})
+        res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
     }
@@ -59,9 +59,9 @@ app.get("/cheeses", async (req, res) => {
 })
 
 // create
-app.post("/cheeses", async (req, res) => {
+app.post("/cheese", async (req, res) => {
     try {
-        const cheese = await Cheeses.create(req.body)
+        const cheese = await Cheese.create(req.body)
         res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
@@ -69,9 +69,9 @@ app.post("/cheeses", async (req, res) => {
 })
 
 // show
-app.get("/cheeses/:id", async (req, res) => {
+app.get("/cheese/:id", async (req, res) => {
     try {
-        const cheese = await Cheeses.findById(req.params.id)
+        const cheese = await Cheese.findById(req.params.id)
         res.json(cheese)
     } catch (error) {
         res.status(400).json({error})
@@ -79,7 +79,7 @@ app.get("/cheeses/:id", async (req, res) => {
 })
 
 // update
-app.put("/cheeses/:id", async (req, res) => {
+app.put("/cheese/:id", async (req, res) => {
     try {
         const cheese = await Cheeses.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.json(cheese)
@@ -89,7 +89,7 @@ app.put("/cheeses/:id", async (req, res) => {
 })
 
 // delete
-app.delete("/cheeses/:id", async (req, res) => {
+app.delete("/cheese/:id", async (req, res) => {
     try {
         const cheese = await Cheeses.findByIdAndDelete(req.params.id)
         res.status(204).json(cheese)
